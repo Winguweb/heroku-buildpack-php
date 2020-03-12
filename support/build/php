@@ -208,6 +208,9 @@ for f in ${OUT_PREFIX}/lib/php/extensions/*/*.so; do
 	echo "extension=$(basename $f)" >> ${OUT_PREFIX}/etc/php/php.ini
 done
 
+echo "-----> Adding Imagick config"
+echo "extension=imagick.so" >> ${OUT_PREFIX}/etc/php/php.ini
+
 extra=$(echo "${shared[@]}" | python -c 'import sys, json; json.dump({"shared": dict([item.split(":") if ":" in item else (item, True) for item in sys.stdin.read().split()]), "export": "bin/export.php.sh", "profile": "bin/profile.php.sh"}, sys.stdout)')
 
 MANIFEST_REQUIRE="${MANIFEST_REQUIRE:-"{}"}"
